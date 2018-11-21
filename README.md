@@ -2,11 +2,15 @@
 
 Simple class wrapping native Animated Value that helps to perform various operations on them
 
-`yarn add react-native-animated-mananger`
+```
+yarn add react-native-animated-mananger
+```
 
 ## Create value
 
 ```ts
+import { AnimatedManager } from 'react-native-animated-mananger';
+
 new AnimatedManager(0);
 new AnimatedManager(true); // will convert true > 1, false > 0
 new AnimatedManager(new Animated.Value(1));
@@ -21,11 +25,16 @@ const rawAnimatedValue = value.getValue();
 
 ## Compose values
 
-```ts
+```tsx
 const valueA = new AnimatedManager(1);
 const valueB = new AnimatedManager(2);
 const valueC = new AnimatedManager(4);
-const valueA = valueA.add(valueB, valueC);
+const valueD = valueA
+  .add(valueB, valueC)
+  .multiply(2)
+  .divide(valueB);
+
+<SomeAnimatedView style={{ height: valueD.getValue() }} />;
 ```
 
 ## Call animations as promises
@@ -50,6 +59,7 @@ type AnimatedValueInput = number | boolean | Animated.Value | AnimatedManager;
 value.getValue(): RawAnimatedValue;
 // inverts value that is in 0-1 range.
 // example: const animatedOpacity = isHidden.invert()
+// it's shortcut of .interpolate({ inputRange: [0, 1], outputRange: [1, 0})
 value.invert(): AnimatedManager;
 
 // basic mathematical operators - under the hood it just use raw Animated.add etc but in chainable way
