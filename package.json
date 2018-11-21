@@ -1,0 +1,17 @@
+{
+  "name": "react-native-animated-manager",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "peerDependencies": {
+    "react-native": "^0.57.5"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.57.12",
+    "typescript": "^3.1.6"
+  }
+}
